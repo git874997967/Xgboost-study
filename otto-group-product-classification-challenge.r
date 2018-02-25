@@ -16,8 +16,6 @@ featureclass = rep("numeric", 93)
 colclasstrain = c('integer', featureclass, 'character')
 colclasstest = c('integer', featureclass)
 train = read.csv(file.choose(), header = T, colClasses = colclasstrain)
-View(train)
-str(train)
 test = read.csv(file.choose(), header = T, colClasses = colclasstest)
 ###keep the record
 id = test[, 1]
@@ -47,28 +45,27 @@ param <- list(
   "eval_metric" = "mlogloss",
   "num_class" = numberOfClasses
 )
-####
-cv.nround = 200
-cv.nfold = 10
-
-bst.cv = xgb.cv(
-  param = param,
-  data = trainMatrix,
-  label = target,
-  nfold = cv.nfold,
-  nrounds = cv.nround
-)
-
-##get the nround
-nround <-
-  which(
-    bst.cv$evaluation_log$test_mlogloss_mean == min(bst.cv$evaluation_log$test_mlogloss_mean)
-  )
-min(bst.cv$evaluation_log$test_mlogloss_mean)
-
-nround
+# ####
+# cv.nround = 200
+# cv.nfold = 10
+# 
+# bst.cv = xgb.cv(
+#   param = param,
+#   data = trainMatrix,
+#   label = target,
+#   nfold = cv.nfold,
+#   nrounds = cv.nround
+# )
+# 
+# ##get the nround
+# nround <-
+#   which(
+#     bst.cv$evaluation_log$test_mlogloss_mean == min(bst.cv$evaluation_log$test_mlogloss_mean)
+#   )
+# min(bst.cv$evaluation_log$test_mlogloss_mean)
+ 
 ###train the model
-nround = 187
+nround = 191
 bst = xgboost(
   data = trainMatrix,
   label = target,
